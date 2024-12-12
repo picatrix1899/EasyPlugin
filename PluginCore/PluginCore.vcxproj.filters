@@ -27,10 +27,10 @@
     <ClInclude Include="Source\Public\EasyPlugin\IPluginFactory.h">
       <Filter>Headerdateien</Filter>
     </ClInclude>
-    <ClInclude Include="Source\Public\EasyPlugin\IInternalSharedObjectStore.h">
+    <ClInclude Include="Source\Public\EasyPlugin\AppObjectStoreIntern.h">
       <Filter>Headerdateien</Filter>
     </ClInclude>
-    <ClInclude Include="Source\Public\EasyPlugin\IInternalSharedStd.h">
+    <ClInclude Include="Source\Public\EasyPlugin\IPluginEntryPoint.h">
       <Filter>Headerdateien</Filter>
     </ClInclude>
   </ItemGroup>

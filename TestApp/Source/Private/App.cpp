@@ -1,3 +1,5 @@
+#include "pch.h"
+
 #include <iostream>
 #include <vector>
 #include <memory>
@@ -7,6 +9,8 @@
 
 #include "EasyPlugin/PluginManager.h"
 #include "EasyPlugin/IPlugin.h"
+#include "ITestAppPlugin.h"
+#include "TestStd.h"
 
 /*
 std::vector<PluginInstance> getPlugins(std::vector<HINSTANCE>& modules) {
@@ -67,16 +71,21 @@ std::vector<PluginInstance> getPlugins(std::vector<HINSTANCE>& modules) {
  */
 
 int main() {
+    TestApp::TestStd* std = static_cast<TestApp::TestStd*>(new TestApp::TestStd());
+
     EasyPlugin::PluginManager manager = EasyPlugin::PluginManager();
-
     manager.LoadPlugin("TestPluginA.dll");
+    manager.GetAppObjectStore()->Add<TestApp::TestStd>(std);
 
-    for (EasyPlugin::PluginInstance instance : manager.GetPlugins()) {
-        EasyPlugin::SPluginInfo info{};
+    for (EasyPlugin::PluginInstance instance : manager.GetLoadedPlugins()) {
+        EasyPlugin::IPlugin* rawPlugin = instance.p_Plugin;
+        TestApp::ITestAppPlugin* plugin = dynamic_cast<TestApp::ITestAppPlugin*>(rawPlugin);
 
-        instance.plugin->GetInfo(&info);
+        EasyPlugin::SPluginInfo info = rawPlugin->GetInfo();
 
         std::cout << info.p_Name << std::endl;
+
+        plugin->OnServerStart();
     }
 
     system("pause");

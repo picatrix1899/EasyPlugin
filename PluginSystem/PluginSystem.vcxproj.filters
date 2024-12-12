@@ -15,24 +15,21 @@
     </Filter>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="Source\Private\pch.h">
-      <Filter>Headerdateien</Filter>
-    </ClInclude>
     <ClInclude Include="Source\Public\EasyPlugin\PluginManager.h">
       <Filter>Headerdateien</Filter>
     </ClInclude>
-    <ClInclude Include="Source\Public\EasyPlugin\InternalSharedStd.h">
+    <ClInclude Include="Source\Private\pch.h">
       <Filter>Headerdateien</Filter>
     </ClInclude>
-    <ClInclude Include="Source\Public\EasyPlugin\InternalSharedObjectStore.h">
+    <ClInclude Include="Source\Private\framework.h">
       <Filter>Headerdateien</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="Source\Private\pch.cpp">
+    <ClCompile Include="Source\Public\EasyPlugin\PluginManager.cpp">
       <Filter>Quelldateien</Filter>
     </ClCompile>
-    <ClCompile Include="Source\Public\EasyPlugin\PluginManager.cpp">
+    <ClCompile Include="Source\Private\pch.cpp">
       <Filter>Quelldateien</Filter>
     </ClCompile>
   </ItemGroup>

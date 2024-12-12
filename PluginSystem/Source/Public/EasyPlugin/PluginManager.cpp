@@ -5,50 +5,68 @@
 #include <stdexcept>
 
 #include "PluginManager.h"
-#include "InternalSharedObjectStore.h"
-#include "InternalSharedStd.h"
+#include "EasyPlugin/AppObjectStoreIntern.h"
+#include "EasyPlugin/IPluginEntryPoint.h"
+#include "EasyPlugin/IPluginFactory.h"
+#include "EasyPlugin/IPlugin.h"
 
 namespace EasyPlugin {
+
+    PluginManager::PluginManager() {
+        this->m_AppObjectStore = new AppObjectStoreIntern();
+    }
 
     PluginManager::~PluginManager() {
         UnloadAll();
     }
 
 	void PluginManager::LoadPlugin(std::string path) {
-            typedef EasyPlugin::IPlugin* (__cdecl* CreatePluginObjectProc)(void);
+            using CreatePluginEntryPointProc = IPluginEntryPoint* (*)();
 
-            HINSTANCE dllHandle = LoadLibrary(LR"(TestPluginA.dll)");
+            HMODULE dllHandle = LoadLibraryA(path.c_str());
 
             if (!dllHandle) {
                 throw std::runtime_error("Library wasn't loaded successfully!");
             }
 
-            CreatePluginObjectProc createPluginObjectFunc = (CreatePluginObjectProc)GetProcAddress(dllHandle, "CreatePluginObject");
+            FARPROC funcAddress = GetProcAddress(dllHandle, "CreatePluginEntryPointObject");
+            CreatePluginEntryPointProc createPluginEntryPointFunc = reinterpret_cast<CreatePluginEntryPointProc>(funcAddress);
 
-            if (!createPluginObjectFunc) {
-                throw std::runtime_error("Invalid Plugin DLL: both 'getObj' must be defined.");
+            if (!createPluginEntryPointFunc) {
+                throw std::runtime_error("Invalid Plugin DLL: No function for entry point creation.");
             }
                 
-            EasyPlugin::IPlugin* obj = createPluginObjectFunc();
+            IPluginEntryPoint* pluginEntryPoint = createPluginEntryPointFunc();
 
-            InternalSharedObjectStore* store = new InternalSharedObjectStore();
-            store->sharedStd = new InternalSharedStd();
+            IPluginEntryPoint::SInitInternData initInternData{};
+            initInternData.p_AppObjectStore = this->m_AppObjectStore;
 
-            obj->InitSharedObject(store);
+            pluginEntryPoint->InitIntern(initInternData);
 
-            PluginInstance instance;
-            instance.plugin = obj;
-            instance.handle = dllHandle;
+            IPluginFactory* pluginFactory = pluginEntryPoint->GetPluginFactory();
 
-            this->plugins.push_back(instance);
+            std::vector<IPlugin*> plugins = pluginFactory->Create();
+
+            PluginFile pluginFile{};
+            pluginFile.p_Path = path;
+            pluginFile.p_Handle = dllHandle;
+
+            for (IPlugin* plugin : plugins) {
+                PluginInstance pluginInstance{};
+                pluginInstance.p_File = &pluginFile;
+                pluginInstance.p_Plugin = plugin;
+
+                pluginFile.p_Instances.push_back(pluginInstance);
+            }
 	}
 
 	void PluginManager::UnloadAll() {
 
-        for (PluginInstance plugin : this->plugins) {
-            FreeLibrary(plugin.handle);
+        for (PluginFile plugin : this->m_PluginFiles) {
+            FreeLibrary(plugin.p_Handle);
         }
 
-        this->plugins.clear();
+        this->m_PluginFiles.clear();
+        this->m_PluginInstances.clear();
 	}
 }

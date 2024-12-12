@@ -2,23 +2,31 @@
 
 #include <string>
 
-#include "IInternalSharedObjectStore.h"
-
 namespace EasyPlugin {
+
+	struct SSemanticVersion {
+		int p_Major;
+		int p_Minor;
+		int p_Hotfix;
+
+		SSemanticVersion(int major, int minor, int hotfix) : p_Major(major), p_Minor(minor), p_Hotfix(hotfix) { }
+
+		SSemanticVersion(int major, int minor) : p_Major(major), p_Minor(minor), p_Hotfix(0) {}
+
+		SSemanticVersion() : p_Major(0), p_Minor(0), p_Hotfix(0) { }
+	};
 
 	struct SPluginInfo {
 		std::string p_Name;
+		SSemanticVersion p_Version;
 	};
 
 	class IPlugin {
 	public:
 		virtual ~IPlugin() = default;
 
-		virtual void GetInfo(SPluginInfo* info) = 0;
-
-		virtual void InitSharedObject(IInternalSharedObjectStore* objects) = 0;
+	public:
+		virtual SPluginInfo GetInfo() = 0;
 	};
-
-	extern "C" _declspec(dllexport) IPlugin* CreatePluginObject();
 
 }

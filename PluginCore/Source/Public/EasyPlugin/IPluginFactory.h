@@ -1,13 +1,17 @@
 #pragma once
 
+#include <vector>
+
 #include "IPlugin.h"
 
 namespace EasyPlugin {
 
 	class IPluginFactory {
+	public:
 		virtual ~IPluginFactory() = default;
 
-		virtual IPlugin** Create() = 0;
+	public:
+		virtual std::vector<IPlugin*> Create() = 0;
 	};
 
 }

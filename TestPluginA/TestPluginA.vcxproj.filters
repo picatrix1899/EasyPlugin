@@ -15,18 +15,27 @@
     </Filter>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="pch.h">
+    <ClInclude Include="Source\Private\TestPlugin.h">
       <Filter>Headerdateien</Filter>
     </ClInclude>
-    <ClInclude Include="TestPlugin.h">
+    <ClInclude Include="Source\Private\pch.h">
+      <Filter>Headerdateien</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\Private\framework.h">
+      <Filter>Headerdateien</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\Private\TestStd.h">
       <Filter>Headerdateien</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="pch.cpp">
+    <ClCompile Include="Source\Private\TestPlugin.cpp">
       <Filter>Quelldateien</Filter>
     </ClCompile>
-    <ClCompile Include="TestPlugin.cpp">
+    <ClCompile Include="Source\Private\pch.cpp">
+      <Filter>Quelldateien</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\Private\TestStd.cpp">
       <Filter>Quelldateien</Filter>
     </ClCompile>
   </ItemGroup>
