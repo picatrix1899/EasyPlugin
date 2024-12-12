@@ -19,7 +19,7 @@ namespace EasyPlugin {
 		}
 	};
 
-	extern IPluginEntryPoint* CreatePluginEntryPoint() {
+	extern "C" _declspec(dllexport) IPluginEntryPoint* CreatePluginEntryPointObject() {
 		return new PluginEntryPoint();
 	}
 }

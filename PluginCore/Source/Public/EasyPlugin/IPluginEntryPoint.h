@@ -19,10 +19,5 @@ namespace EasyPlugin {
 		virtual IPluginFactory* GetPluginFactory() = 0;
 	};
 
-	extern IPluginEntryPoint* CreatePluginEntryPoint();
-
-	extern "C" _declspec(dllexport) IPluginEntryPoint* CreatePluginEntryPointObject() {
-		return CreatePluginEntryPoint();
-	}
-
+	extern "C" _declspec(dllexport) IPluginEntryPoint* CreatePluginEntryPointObject();
 }
