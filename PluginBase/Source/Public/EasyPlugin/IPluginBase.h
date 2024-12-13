@@ -10,5 +10,4 @@ namespace EasyPlugin {
 		virtual ~IPluginBase() = default;
 	};
 
-	extern IPluginFactory* CreatePluginFactory();
 }

@@ -165,6 +165,7 @@
     <ClInclude Include="Source\Public\EasyPlugin\DefaultPluginFactory.h" />
     <ClInclude Include="Source\Public\EasyPlugin\IPluginBase.h" />
     <ClInclude Include="Source\Public\EasyPlugin\AppObjectStore.h" />
+    <ClInclude Include="Source\Public\EasyPlugin\AModuleEntryPointBase.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Source\Private\dllmain.cpp" />
@@ -176,7 +177,7 @@
     </ClCompile>
     <ClCompile Include="Source\Public\EasyPlugin\AppObjectStore.cpp" />
     <ClCompile Include="Source\Public\EasyPlugin\DefaultPluginFactory.cpp" />
-    <ClCompile Include="Source\Public\EasyPlugin\PluginEntryPoint.cpp" />
+    <ClCompile Include="Source\Public\EasyPlugin\AModuleEntryPointBase.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\PluginCore\PluginCore.vcxproj">

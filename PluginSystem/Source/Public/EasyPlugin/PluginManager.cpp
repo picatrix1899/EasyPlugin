@@ -6,7 +6,7 @@
 
 #include "PluginManager.h"
 #include "EasyPlugin/AppObjectStoreIntern.h"
-#include "EasyPlugin/IPluginEntryPoint.h"
+#include "EasyPlugin/IModuleEntryPoint.h"
 #include "EasyPlugin/IPluginFactory.h"
 #include "EasyPlugin/IPlugin.h"
 
@@ -21,24 +21,25 @@ namespace EasyPlugin {
     }
 
 	void PluginManager::LoadPlugin(std::string path) {
-            using CreatePluginEntryPointProc = IPluginEntryPoint* (*)();
+            using CreatePluginEntryPointProc = IModuleEntryPoint * (*)();
+            typedef EasyPlugin::IPlugin* (__cdecl* CreatePluginObjectProc)(void);
 
-            HMODULE dllHandle = LoadLibraryA(path.c_str());
+            HINSTANCE dllHandle = LoadLibrary(LR"(TestPluginA.dll)");
 
             if (!dllHandle) {
                 throw std::runtime_error("Library wasn't loaded successfully!");
             }
 
-            FARPROC funcAddress = GetProcAddress(dllHandle, "CreatePluginEntryPointObject");
+            FARPROC funcAddress = GetProcAddress(dllHandle, "CreateEntryPointObject");
             CreatePluginEntryPointProc createPluginEntryPointFunc = reinterpret_cast<CreatePluginEntryPointProc>(funcAddress);
 
             if (!createPluginEntryPointFunc) {
                 throw std::runtime_error("Invalid Plugin DLL: No function for entry point creation.");
             }
                 
-            IPluginEntryPoint* pluginEntryPoint = createPluginEntryPointFunc();
+            IModuleEntryPoint* pluginEntryPoint = createPluginEntryPointFunc();
 
-            IPluginEntryPoint::SInitInternData initInternData{};
+            IModuleEntryPoint::SInitInternData initInternData{};
             initInternData.p_AppObjectStore = this->m_AppObjectStore;
 
             pluginEntryPoint->InitIntern(initInternData);
@@ -57,7 +58,11 @@ namespace EasyPlugin {
                 pluginInstance.p_Plugin = plugin;
 
                 pluginFile.p_Instances.push_back(pluginInstance);
+
+                this->m_PluginInstances.push_back(pluginInstance);
             }
+
+            this->m_PluginFiles.push_back(pluginFile);
 	}
 
 	void PluginManager::UnloadAll() {

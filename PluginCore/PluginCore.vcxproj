@@ -162,7 +162,7 @@
     <ClInclude Include="Source\Private\framework.h" />
     <ClInclude Include="Source\Private\pch.h" />
     <ClInclude Include="Source\Public\EasyPlugin\IPlugin.h" />
-    <ClInclude Include="Source\Public\EasyPlugin\IPluginEntryPoint.h" />
+    <ClInclude Include="Source\Public\EasyPlugin\IModuleEntryPoint.h" />
     <ClInclude Include="Source\Public\EasyPlugin\IPluginFactory.h" />
     <ClInclude Include="Source\Public\EasyPlugin\AppObjectStoreIntern.h" />
   </ItemGroup>

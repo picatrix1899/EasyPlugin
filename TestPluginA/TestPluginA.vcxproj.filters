@@ -38,5 +38,8 @@
     <ClCompile Include="Source\Private\TestStd.cpp">
       <Filter>Quelldateien</Filter>
     </ClCompile>
+    <ClCompile Include="Source\Private\ModuleEntryPoint.cpp">
+      <Filter>Quelldateien</Filter>
+    </ClCompile>
   </ItemGroup>
 </Project>

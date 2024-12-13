@@ -30,6 +30,9 @@
     <ClInclude Include="Source\Public\EasyPlugin\DefaultPluginFactory.h">
       <Filter>Headerdateien</Filter>
     </ClInclude>
+    <ClInclude Include="Source\Public\EasyPlugin\AModuleEntryPointBase.h">
+      <Filter>Headerdateien</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Source\Private\dllmain.cpp">
@@ -38,7 +41,7 @@
     <ClCompile Include="Source\Public\EasyPlugin\AppObjectStore.cpp">
       <Filter>Quelldateien</Filter>
     </ClCompile>
-    <ClCompile Include="Source\Public\EasyPlugin\PluginEntryPoint.cpp">
+    <ClCompile Include="Source\Public\EasyPlugin\AModuleEntryPointBase.cpp">
       <Filter>Quelldateien</Filter>
     </ClCompile>
     <ClCompile Include="Source\Private\pch.cpp">

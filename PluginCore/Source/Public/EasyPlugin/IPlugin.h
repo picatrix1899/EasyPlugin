@@ -29,4 +29,5 @@ namespace EasyPlugin {
 		virtual SPluginInfo GetInfo() = 0;
 	};
 
+	
 }
