@@ -1,14 +1,14 @@
 #include "pch.h"
 
-#include "TestPlugin.h"
+#include "TestPluginB.h"
 #include "EasyPlugin/IPluginFactory.h"
 #include "EasyPlugin/DefaultPluginFactory.h"
 #include "TestStd.h"
 
-namespace TestPluginA {
+namespace TestPluginB {
 
-	void TestPlugin::OnServerStart() {
-		TestStd::cout("Hello Devil");
+	void TestPluginB::OnServerStart() {
+		TestStd::cout("Hello God");
 	}	
 
 }

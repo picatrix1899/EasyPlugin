@@ -75,6 +75,7 @@ int main() {
 
     EasyPlugin::PluginManager manager = EasyPlugin::PluginManager();
     manager.LoadPlugin("TestPluginA.dll");
+    manager.LoadPlugin("TestPluginB.dll");
     manager.GetAppObjectStore()->Add<TestApp::ITestStd>(std);
 
     for (EasyPlugin::PluginInstance instance : manager.GetLoadedPlugins()) {

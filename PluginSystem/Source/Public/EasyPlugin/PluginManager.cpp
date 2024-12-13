@@ -24,7 +24,7 @@ namespace EasyPlugin {
             using CreatePluginEntryPointProc = IModuleEntryPoint * (*)();
             typedef EasyPlugin::IPlugin* (__cdecl* CreatePluginObjectProc)(void);
 
-            HINSTANCE dllHandle = LoadLibrary(LR"(TestPluginA.dll)");
+            HMODULE dllHandle = LoadLibraryA(path.c_str());
 
             if (!dllHandle) {
                 throw std::runtime_error("Library wasn't loaded successfully!");

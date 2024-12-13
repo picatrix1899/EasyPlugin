@@ -15,10 +15,7 @@
     </Filter>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="Source\Public\EasyPlugin\IPluginBase.h">
-      <Filter>Headerdateien</Filter>
-    </ClInclude>
-    <ClInclude Include="Source\Public\EasyPlugin\AppObjectStore.h">
+    <ClInclude Include="Source\Private\TestPluginB.h">
       <Filter>Headerdateien</Filter>
     </ClInclude>
     <ClInclude Include="Source\Private\pch.h">
@@ -27,24 +24,21 @@
     <ClInclude Include="Source\Private\framework.h">
       <Filter>Headerdateien</Filter>
     </ClInclude>
-    <ClInclude Include="Source\Public\EasyPlugin\DefaultPluginFactory.h">
-      <Filter>Headerdateien</Filter>
-    </ClInclude>
-    <ClInclude Include="Source\Public\EasyPlugin\ModuleEntryPoint.h">
+    <ClInclude Include="Source\Private\TestStd.h">
       <Filter>Headerdateien</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="Source\Private\dllmain.cpp">
-      <Filter>Quelldateien</Filter>
-    </ClCompile>
-    <ClCompile Include="Source\Public\EasyPlugin\AppObjectStore.cpp">
+    <ClCompile Include="Source\Private\TestPluginB.cpp">
       <Filter>Quelldateien</Filter>
     </ClCompile>
     <ClCompile Include="Source\Private\pch.cpp">
       <Filter>Quelldateien</Filter>
     </ClCompile>
-    <ClCompile Include="Source\Public\EasyPlugin\DefaultPluginFactory.cpp">
+    <ClCompile Include="Source\Private\TestStd.cpp">
+      <Filter>Quelldateien</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\Private\ModuleEntryPoint.cpp">
       <Filter>Quelldateien</Filter>
     </ClCompile>
   </ItemGroup>

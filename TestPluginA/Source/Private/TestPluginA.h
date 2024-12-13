@@ -5,14 +5,14 @@
 
 namespace TestPluginA {
 
-	class TestPlugin : public EasyPlugin::IPluginBase, public TestApp::ITestAppPlugin {
+	class TestPluginA : public EasyPlugin::IPluginBase, public TestApp::ITestAppPlugin {
 	private:
-		EasyPlugin::SPluginInfo pluginInfo{ "TestPlugin", {1, 0, 0} };
+		EasyPlugin::SPluginInfo pluginInfo{ "TestPluginA", {1, 0, 0} };
 
 	public:
-		TestPlugin() {};
+		TestPluginA() {};
 
-		virtual ~TestPlugin() = default;
+		virtual ~TestPluginA() = default;
 
 		EasyPlugin::SPluginInfo GetInfo() { return this->pluginInfo; }
 
